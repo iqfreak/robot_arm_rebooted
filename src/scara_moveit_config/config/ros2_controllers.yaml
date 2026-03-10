@@ -1,0 +1,16 @@
+moveit_simple_controller_manager:
+  controller_names:
+    - scara_arm_controller
+    - gripper_controller
+
+scara_arm_controller:
+  type: FollowJointTrajectory
+  joints: [joint1, joint2, joint3, joint4]
+  action_ns: follow_joint_trajectory
+  default: true
+
+gripper_controller:
+  type: FollowJointTrajectory
+  joints: [joint_gripper_left, joint_gripper_right]
+  action_ns: follow_joint_trajectory
+  default: true

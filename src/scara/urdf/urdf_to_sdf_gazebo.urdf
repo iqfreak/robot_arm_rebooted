@@ -1,6 +1,12 @@
 <?xml version="1.0" ?>
 <robot name="urdf_to_sdf_gazebo" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<link name="world"/>
 
+<joint name="world_fixed" type="fixed">
+  <parent link="world"/>
+  <child link="base_link"/>
+  <origin xyz="0 0 0" rpy="0 0 0"/>
+</joint>
   <material name="silver">
     <color rgba="0.75 0.75 0.75 1.0"/>
   </material>
