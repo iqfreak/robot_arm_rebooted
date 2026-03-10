@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: scara
+    relative_path: urdf/urdf_to_sdf_gazebo.urdf
+  srdf:
+    relative_path: config/urdf_to_sdf_gazebo.srdf
+  package_settings:
+    author_name: ""
+    author_email: ""
+    generated_timestamp: 1773177571
