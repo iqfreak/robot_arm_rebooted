@@ -5,8 +5,6 @@
     <color rgba="0.75 0.75 0.75 1.0"/>
   </material>
 
-  <!-- ===== LINKS ===== -->
-
   <link name="base_link">
     <inertial>
       <origin xyz="-0.0070117442454045035 -0.004059755672044273 0.01853626945061938" rpy="0 0 0"/>
@@ -15,16 +13,12 @@
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/base_link.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/base_link.stl" scale="0.001 0.001 0.001"/></geometry>
     </collision>
   </link>
 
@@ -36,16 +30,12 @@
     </inertial>
     <visual>
       <origin xyz="-0.400195 -0.16626 -0.128702" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/gripper_handleftlink_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/gripper_handleftlink_1.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="-0.400195 -0.16626 -0.128702" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/gripper_handleftlink_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/gripper_handleftlink_1.stl" scale="0.001 0.001 0.001"/></geometry>
     </collision>
   </link>
 
@@ -57,16 +47,12 @@
     </inertial>
     <visual>
       <origin xyz="-0.299785 -0.09181 -0.128702" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/gripper_mechanismslider_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/gripper_mechanismslider_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="-0.299785 -0.09181 -0.128702" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/gripper_mechanismslider_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/gripper_mechanismslider_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
     </collision>
   </link>
 
@@ -78,16 +64,12 @@
     </inertial>
     <visual>
       <origin xyz="-0.349498 -0.128931 -0.162637" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/gripper_rail_6mm_bottom_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/gripper_rail_6mm_bottom_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="-0.349498 -0.128931 -0.162637" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/gripper_rail_6mm_bottom_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/gripper_rail_6mm_bottom_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
     </collision>
   </link>
 
@@ -99,16 +81,12 @@
     </inertial>
     <visual>
       <origin xyz="-0.268734 -0.019208 -0.22035" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/arm_two_cover_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/arm_two_cover_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="-0.268734 -0.019208 -0.22035" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/arm_two_cover_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/arm_two_cover_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
     </collision>
   </link>
 
@@ -120,16 +98,12 @@
     </inertial>
     <visual>
       <origin xyz="-0.041226 9.1e-05 -0.033561" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/z-axis_top_plate_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/z-axis_top_plate_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="-0.041226 9.1e-05 -0.033561" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/z-axis_top_plate_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/z-axis_top_plate_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
     </collision>
   </link>
 
@@ -141,16 +115,12 @@
     </inertial>
     <visual>
       <origin xyz="-0.074476 -0.002213 -0.26485" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/arm_cover_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/arm_cover_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
       <material name="silver"/>
     </visual>
     <collision>
       <origin xyz="-0.074476 -0.002213 -0.26485" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://scara/meshes/arm_cover_link_1.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
+      <geometry><mesh filename="package://scara/meshes/arm_cover_link_1.stl" scale="0.001 0.001 0.001"/></geometry>
     </collision>
   </link>
 
@@ -176,7 +146,7 @@
     <origin xyz="0.080764 0.109723 -0.057713" rpy="0 0 0"/>
     <parent link="arm_two_cover_link_1"/>
     <child link="gripper_rail_6mm_bottom_link_1"/>
-    <axis xyz="-0.0 0.0 1.0"/>
+    <axis xyz="0.0 0.0 1.0"/>
     <limit upper="2.007129" lower="-0.959931" effort="100" velocity="100"/>
   </joint>
 
@@ -204,8 +174,8 @@
     <limit upper="0.1" lower="-0.13" effort="100" velocity="100"/>
   </joint>
 
-  <!-- ===== ROS2 CONTROL (Gazebo Harmonic) ===== -->
-
+  <!-- ===== ROS2 CONTROL ===== -->
+  <!-- NOTE: controllers.yaml path is injected by gazebo.launch.py at runtime -->
   <ros2_control name="scara_system" type="system">
     <hardware>
       <plugin>ign_ros2_control/IgnitionSystem</plugin>
@@ -241,16 +211,5 @@
       <state_interface name="velocity"/>
     </joint>
   </ros2_control>
-
-  <!-- Gazebo Harmonic ros2_control plugin -->
-  <gazebo>
-    <plugin filename="libign_ros2_control-system.so"
-            name="ign_ros2_control::IgnitionROS2ControlPlugin">
-      <parameters>$(find scara)/config/controllers.yaml</parameters>
-      <ros>
-        <remapping>~/robot_description:=robot_description</remapping>
-      </ros>
-    </plugin>
-  </gazebo>
 
 </robot>

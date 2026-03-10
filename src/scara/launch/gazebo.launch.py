@@ -10,6 +10,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
     pkg = get_package_share_directory('scara')
     urdf_file = os.path.join(pkg, 'urdf', 'urdf_to_sdf_gazebo.urdf')
+    controllers_yaml = os.path.join(pkg, 'config', 'controllers.yaml')
 
     with open(urdf_file, 'r') as f:
         robot_description = f.read()
@@ -26,6 +27,7 @@ def generate_launch_description():
     )
 
     # --- Robot State Publisher ---
+    # controllers.yaml path passed as extra param so ign_ros2_control can find it
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
@@ -33,6 +35,17 @@ def generate_launch_description():
             'robot_description': robot_description,
             'use_sim_time': True
         }],
+        output='screen'
+    )
+
+    # --- Controller Manager (loads controllers.yaml with resolved absolute path) ---
+    controller_manager = Node(
+        package='controller_manager',
+        executable='ros2_control_node',
+        parameters=[
+            {'robot_description': robot_description},
+            controllers_yaml
+        ],
         output='screen'
     )
 
@@ -47,7 +60,7 @@ def generate_launch_description():
         output='screen'
     )
 
-    # --- Bridge: Gazebo clock → ROS2 /clock ---
+    # --- Bridge: Gazebo clock -> ROS2 /clock ---
     gz_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
@@ -91,6 +104,7 @@ def generate_launch_description():
     return LaunchDescription([
         gazebo,
         robot_state_publisher,
+        controller_manager,
         gz_bridge,
         spawn_entity,
         load_jsb_after_spawn,
