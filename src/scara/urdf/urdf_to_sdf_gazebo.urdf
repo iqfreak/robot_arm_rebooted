@@ -211,5 +211,12 @@
       <state_interface name="velocity"/>
     </joint>
   </ros2_control>
-
+  <gazebo>
+    <plugin filename="libign_ros2_control-system.so"
+            name="ign_ros2_control::IgnitionROS2ControlPlugin">
+      <robot_param>robot_description</robot_param>
+      <robot_param_node>robot_state_publisher</robot_param_node>
+      <parameters>/home/ahmed/robot_arm_rebooted/install/scara/share/scara/config/controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
 </robot>
