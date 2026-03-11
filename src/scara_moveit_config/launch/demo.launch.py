@@ -29,6 +29,13 @@ def generate_launch_description():
     joint_limits     = load_yaml(scara_moveit_dir, 'config/joint_limits.yaml')
     ros2_controllers = load_yaml(scara_moveit_dir, 'config/ros2_controllers.yaml')
     pilz             = load_yaml(scara_moveit_dir, 'config/pilz_cartesian_limits.yaml')
+    ompl_planning    = load_yaml(scara_moveit_dir, 'config/ompl_planning.yaml')
+
+    planning_pipeline_config = {
+        'default_planning_pipeline': 'ompl',
+        'planning_pipelines': ['ompl'],
+        'ompl': ompl_planning,
+    }
 
     move_group = Node(
         package='moveit_ros_move_group',
@@ -38,6 +45,7 @@ def generate_launch_description():
             {'robot_description_semantic': robot_description_semantic},
             {'robot_description_kinematics': kinematics},
             {'robot_description_planning': joint_limits},
+            planning_pipeline_config,
             {'use_sim_time': True},
             ros2_controllers,
             pilz,
