@@ -91,21 +91,25 @@ def generate_launch_description():
     )
 
     # --- Load controllers after spawn (chained) ---
-    load_jsb = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller',
-             '--set-state', 'active', 'joint_state_broadcaster'],
+    load_jsb = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['joint_state_broadcaster'],
         output='screen'
     )
-    load_arm = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller',
-             '--set-state', 'active', 'scara_arm_controller'],
+    load_arm = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['scara_arm_controller'],
         output='screen'
     )
-    load_gripper = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller',
-             '--set-state', 'active', 'gripper_controller'],
+    load_gripper = Node(
+        package='controller_manager',
+        executable='spawner',
+        arguments=['gripper_controller'],
         output='screen'
     )
+
 
     jsb_after_spawn = RegisterEventHandler(
         OnProcessExit(target_action=spawn_entity, on_exit=[load_jsb])
@@ -122,6 +126,7 @@ def generate_launch_description():
         gazebo,
         spawn_entity,
         gz_bridge,
-        jsb_after_spawn,
-        arm_after_jsb,
+        load_jsb,      # spawner retries automatically until ready
+        load_arm,
+        load_gripper,
     ])

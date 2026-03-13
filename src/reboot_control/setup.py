@@ -24,6 +24,7 @@ setup(
     },
     entry_points={
         'console_scripts': [
+             'scara_brain = reboot_control.scara_brain:main',
         ],
     },
 )
