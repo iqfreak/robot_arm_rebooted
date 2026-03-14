@@ -4,12 +4,9 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import (
     DeclareLaunchArgument,
-    ExecuteProcess,
     IncludeLaunchDescription,
-    RegisterEventHandler,
     SetEnvironmentVariable,
 )
-from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import Command, LaunchConfiguration
 from launch_ros.actions import Node
@@ -82,15 +79,14 @@ def generate_launch_description():
         output='screen'
     )
 
-    # --- Clock bridge ---
+        # --- Clock bridge ---
     gz_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
         arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
         output='screen'
-    )
+        )
 
-    # --- Load controllers after spawn (chained) ---
     load_jsb = Node(
         package='controller_manager',
         executable='spawner',
@@ -109,15 +105,6 @@ def generate_launch_description():
         arguments=['gripper_controller'],
         output='screen'
     )
-
-
-    jsb_after_spawn = RegisterEventHandler(
-        OnProcessExit(target_action=spawn_entity, on_exit=[load_jsb])
-    )
-    arm_after_jsb = RegisterEventHandler(
-        OnProcessExit(target_action=load_jsb, on_exit=[load_arm, load_gripper])
-    )
-
     return LaunchDescription([
         model_arg,
         gz_resource_path,
