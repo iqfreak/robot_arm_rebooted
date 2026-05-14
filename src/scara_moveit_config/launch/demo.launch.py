@@ -35,22 +35,37 @@ def generate_launch_description():
     with open(srdf_path, 'r') as f:
         robot_description_semantic = f.read()
 
-    kinematics    = load_yaml(scara_moveit_dir, 'config/kinematics.yaml')
-    joint_limits  = load_yaml(scara_moveit_dir, 'config/joint_limits.yaml')
-    ompl_planning = load_yaml(scara_moveit_dir, 'config/ompl_planning.yaml')
-    pilz          = load_yaml(scara_moveit_dir, 'config/pilz_cartesian_limits.yaml')
+    kinematics         = load_yaml(scara_moveit_dir, 'config/kinematics.yaml')
+    joint_limits       = load_yaml(scara_moveit_dir, 'config/joint_limits.yaml')
+    ompl_planning      = load_yaml(scara_moveit_dir, 'config/ompl_planning.yaml')
+    pilz               = load_yaml(scara_moveit_dir, 'config/pilz_cartesian_limits.yaml')
+    moveit_controllers = load_yaml(scara_moveit_dir, 'config/moveit_controllers.yaml')
 
+    # ── Planning pipeline (flat dicts — no nested move_group key) ─────
     planning_pipeline_config = {
         'default_planning_pipeline': 'ompl',
         'planning_pipelines': ['ompl'],
-        'ompl': ompl_planning,
     }
 
-    # ── move_group connects to ALREADY RUNNING controllers in Gazebo ──
-    controllers_yaml_path = os.path.join(
-    scara_moveit_dir, 'config', 'ros2_controllers.yaml'
-)
+    ompl_config = {
+        'ompl': {
+            'planning_plugins': ['ompl_interface/OMPLPlanner'],
+            **ompl_planning,
+        }
+    }
 
+    # ── robot_state_publisher (required for TF + planning scene) ──────
+    robot_state_publisher = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        parameters=[
+            {'robot_description': robot_description},
+            {'use_sim_time': True},
+        ],
+        output='screen'
+    )
+
+    # ── move_group node ────────────────────────────────────────────────
     move_group = Node(
         package='moveit_ros_move_group',
         executable='move_group',
@@ -60,14 +75,15 @@ def generate_launch_description():
             {'robot_description_kinematics': kinematics},
             {'robot_description_planning': joint_limits},
             planning_pipeline_config,
-            {'use_sim_time': True},
+            ompl_config,
+            moveit_controllers,
             pilz,
-            controllers_yaml_path,   # ← pass the FILE PATH directly, not loaded dict
+            {'use_sim_time': True},
         ],
         output='screen'
     )
 
-
+    # ── RViz ───────────────────────────────────────────────────────────
     rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -81,10 +97,11 @@ def generate_launch_description():
         output='screen'
     )
 
-    # Delay MoveIt by 5 seconds to let Gazebo + controllers fully start
+    # ── Delay MoveIt by 5 s to let Gazebo + controllers fully start ───
     moveit_delayed = TimerAction(period=5.0, actions=[move_group, rviz])
 
     return LaunchDescription([
         gazebo_launch,
+        robot_state_publisher,
         moveit_delayed,
     ])
